@@ -7,7 +7,7 @@ import Swimlane from '../components/Swimlane';
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 
-import auth from '../utils/auth';
+import Auth from '../utils/auth';
 
 const boardStates = ['Todo', 'In Progress', 'Done'];
 
@@ -17,7 +17,7 @@ const Board = () => {
   const [loginCheck, setLoginCheck] = useState(false);
 
   const checkLogin = () => {
-    if(auth.loggedIn()) {
+    if(Auth.loggedIn()) {
       setLoginCheck(true);
     }
   };

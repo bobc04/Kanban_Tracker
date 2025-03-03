@@ -65,9 +65,9 @@ const EditTicket = () => {
                 value={ticket.status || ''}
                 onChange={handleChange}
               >
-                <option  value='Todo'>Todo</option>
-                <option  value='In Progress'>In Progress</option>
-                <option  value='Done'>Done</option>
+                <option value='Todo'>Todo</option>
+                <option value='In Progress'>In Progress</option>
+                <option value='Done'>Done</option>
             </select>
             <label htmlFor='tDescription'>Ticket Description</label>
               <textarea

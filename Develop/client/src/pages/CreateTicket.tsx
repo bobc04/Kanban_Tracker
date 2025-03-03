@@ -61,8 +61,7 @@ const CreateTicket = () => {
   return (
     <>
       <div className='container'>
-        <form className='form' onSubmit=
-        {handleSubmit}>
+        <form className='form' onSubmit={handleSubmit}>
           <h1>Create Ticket</h1>
           <label htmlFor='tName'>Ticket Name</label>
           <textarea 
@@ -111,7 +110,7 @@ const CreateTicket = () => {
             )
           }
           </select>
-          <button type='submit' onSubmit={handleSubmit}>Submit Form</button>
+          <button type='submit'>Submit Form</button>
         </form>
       </div>
     </>

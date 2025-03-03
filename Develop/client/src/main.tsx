@@ -1,4 +1,5 @@
-import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
@@ -8,6 +9,7 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import EditTicket from './pages/EditTicket.tsx';
 import CreateTicket from './pages/CreateTicket.tsx';
 import Login from './pages/Login.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,11 +23,19 @@ const router = createBrowserRouter([
       }, 
       {
         path: '/edit',
-        element: <EditTicket />
+        element: (
+          <ProtectedRoute>
+            <EditTicket />
+          </ProtectedRoute>
+        )
       },
       {
         path: '/create',
-        element: <CreateTicket />
+        element: (
+          <ProtectedRoute>
+            <CreateTicket />
+          </ProtectedRoute>
+        )
       },
       {
         path: '/login',
@@ -33,9 +43,13 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
+  createRoot(rootElement).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  );
 }
