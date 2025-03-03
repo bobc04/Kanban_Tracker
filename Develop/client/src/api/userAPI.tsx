@@ -1,25 +1,25 @@
-import Auth from '../utils/auth';
+import { UserLogin } from "../interfaces/UserLogin";
 
-const retrieveUsers = async () => {
+const login = async (userInfo: UserLogin) => {
   try {
-    const response = await fetch('/api/users', {
+    const response = await fetch('/auth/login', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Auth.getToken()}`
-      }
+      },
+      body: JSON.stringify(userInfo),
     });
-    const data = await response.json();
 
-    if(!response.ok) {
-      throw new Error('invalid user API response, check network tab!');
+    if (!response.ok) {
+      throw new Error('Login failed');
     }
 
+    const data = await response.json();
     return data;
-
-  } catch (err) { 
-    console.log('Error from data retrieval:', err);
-    return [];
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
   }
-}
+};
 
-export { retrieveUsers };
+export { login };
