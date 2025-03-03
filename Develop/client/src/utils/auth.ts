@@ -1,31 +1,32 @@
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 
-class AuthService {
-  getProfile() {
-    // TODO: return the decoded token
-  }
+import { jwtDecode } from "jwt-decode";
 
-  loggedIn() {
-    // TODO: return a value that indicates if the user is logged in
-  }
-  
-  isTokenExpired(token: string) {
-    // TODO: return a value that indicates if the token is expired
-  }
-
-  getToken(): string {
-    // TODO: return the token
-  }
-
-  login(idToken: string) {
-    // TODO: set the token to localStorage
-    // TODO: redirect to the home page
-  }
-
-  logout() {
-    // TODO: remove the token from localStorage
-    // TODO: redirect to the login page
-  }
+interface JwtPayload {
+  username: string;
+  exp: number;
 }
 
-export default new AuthService();
+class AuthService {
+  // DECODE THE TOKEN AND RETURN THE USER PROFILE
+  getProfile() {
+    const token = this.getToken();
+    return token ? jwtDecode<JwtPayload>(token) : null;
+  }
+
+  // CHECK IF USER IS LOGGED IN
+  loggedIn() {
+    const token = this.getToken();
+    return token && !this.isTokenExpired(token) ? true : false;
+  }
+  
+  // CHECK IF TOKEN IS EXPIRED
+  isTokenExpired(token: string) {
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
+      return decoded.exp < Date.now() / 1000;
+    } catch (err) {
+      return true;
+    }
+  }
+}
